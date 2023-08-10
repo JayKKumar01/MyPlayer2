@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Video"
+        android:id="@+id/selectVideo"
+        android:onClick="selectVid"
+        android:textStyle="bold"
+        android:fontFamily="times"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/code_bg"
+        android:padding="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="UsingOnClickInXml" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Subtitile"
+        android:id="@+id/selectSub"
+        android:onClick="selectSub"
+        android:textStyle="bold"
+        android:fontFamily="times"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/code_bg"
+        android:padding="10dp"
+        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectVideo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="UsingOnClickInXml" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/playVideo"
+        android:text="Play Video"
+        android:onClick="play"
+        android:textStyle="bold"
+        android:fontFamily="times"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/code_bg"
+        android:padding="10dp"
+        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectSub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="UsingOnClickInXml" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
