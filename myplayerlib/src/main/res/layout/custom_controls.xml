@@ -57,7 +57,6 @@
             <ImageView
                 android:layout_width="44dp"
                 android:layout_height="0dp"
-                android:onClick="openMenu"
                 android:padding="10dp"
                 android:src="@drawable/sett"
                 android:id="@+id/exo_sett"
@@ -313,6 +312,7 @@
                 app:layout_constraintRight_toLeftOf="@id/exo_mute_unmute"
                 app:layout_constraintTop_toTopOf="@id/exo_position"
                 tools:ignore="SpeakableTextPresentCheck" />
+
 
             <ImageView
                 android:id="@+id/exo_mute_unmute"

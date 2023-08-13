@@ -46,7 +46,7 @@ project.afterEvaluate {
             aar(MavenPublication){
                 groupId 'com.github.jaykkumar01'
                 artifactId 'myplayerlib'
-                version '1.0.1'
+                version '1.0'
 
                 artifact bundleReleaseAar
             }
