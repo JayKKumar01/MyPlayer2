@@ -1,7 +1,6 @@
 package com.github.jaykkumar01.myplayerlib;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.OptIn;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -9,19 +8,16 @@ import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
 import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackParameters;
-import androidx.media3.common.TrackSelectionOverride;
+import androidx.media3.common.TrackSelectionParameters;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
 import androidx.media3.ui.PlayerView;
-import androidx.media3.ui.TrackSelectionDialogBuilder;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.PictureInPictureParams;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -32,19 +28,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Rational;
 import android.view.Display;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.jaykkumar01.myplayerlib.models.PlayerProperties;
-import com.github.jaykkumar01.myplayerlib.playerutils.MyHandler;
 import com.github.jaykkumar01.myplayerlib.playerutils.TouchGesture;
 import com.github.jaykkumar01.myplayerlib.playerutils.TrackDialog;
 import com.github.jaykkumar01.myplayerlib.utils.AspectRatio;
 import com.github.jaykkumar01.myplayerlib.utils.AutoRotate;
+import com.github.jaykkumar01.myplayerlib.playerutils.VideoUI;
 import com.google.common.collect.ImmutableList;
 
 
@@ -64,6 +58,7 @@ import com.google.common.collect.ImmutableList;
     private boolean pip;
      private boolean expend = true;
     private int i = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +84,17 @@ import com.google.common.collect.ImmutableList;
         AspectRatio.set(this);
         initViews();
 
+
     }
+
+//    public void test(View view){
+//
+//        TrackSelectionDialog trackSelectionDialog =
+//                TrackSelectionDialog.createForPlayer(
+//                        player,
+//                        /* onDismissListener= */ dismissedDialog -> isShowingTrackSelectionDialog = false);
+//        trackSelectionDialog.show(getSupportFragmentManager(), /* tag= */ null);
+//    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void initViews() {
@@ -99,7 +104,6 @@ import com.google.common.collect.ImmutableList;
         rootLayout.setOnTouchListener(new OnControlsTouch(rootLayout,playerView));
         titleTV = findViewById(R.id.exo_title);
         titleTV.setText(playerProperties.getTitle());
-        trackSelector = new DefaultTrackSelector(this);
     }
 
     @Override
@@ -321,8 +325,9 @@ import com.google.common.collect.ImmutableList;
 
     protected void initializePlayer() {
         player = new ExoPlayer.Builder(this)
-                .setTrackSelector(trackSelector)
+                .setTrackSelector(trackSelector == null? new DefaultTrackSelector(this) : trackSelector)
                 .build();
+
         playerView.setPlayer(player);
         MediaItem mediaItem = getMediaItem();
 //        player.addListener(new PlayerEventListener());
@@ -330,6 +335,7 @@ import com.google.common.collect.ImmutableList;
         player.seekTo(startPosition);
         player.prepare();
         player.play();
+        VideoUI.setRatio(this,playerProperties.getPath());
         trackDialog = new TrackDialog(this,player);
         playerView.setControllerAutoShow(false);
         playerView.setOnTouchListener(new TouchGesture(this,playerView,player));
@@ -367,6 +373,7 @@ import com.google.common.collect.ImmutableList;
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         ImageView fullscreen = (ImageView) findViewById(R.id.exo_screen);
+        VideoUI.setRatio(this,null);
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
             fullscreen.setImageResource(R.drawable.fullscreen_exit);

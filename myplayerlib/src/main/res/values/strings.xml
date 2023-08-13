@@ -1,1 +1,5 @@
-<resources></resources>
+<resources>
+    <string name="exo_track_selection_title_video">Select tracks</string>
+    <string name="exo_track_selection_title_audio">Select Audio Tracks</string>
+    <string name="exo_track_selection_title_text">Select Subtitle Track</string>
+</resources>

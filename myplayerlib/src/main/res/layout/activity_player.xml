@@ -31,7 +31,7 @@
         android:background="@drawable/bg_right_box"
         android:clickable="false"
         android:visibility="gone"
-        app:layout_constraintDimensionRatio="0.88"
+        app:layout_constraintDimensionRatio=".88"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintLeft_toLeftOf="parent"
